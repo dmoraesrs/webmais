@@ -29,7 +29,7 @@
 - name: Install a list of packages
   apt:
     pkg:
-    - python-software-properties
+    - software-properties-common
     - apache2
     - php5.6
     - libapache2-mod-php
@@ -55,18 +55,14 @@
     - php5.6-yaml
     - php5.6-zip
     - php5.6-amqp        
-    - php5.6-apcu-bc     
-    - php5.6-ast         
     - php5.6-calendar    
     - php5.6-cli         
-    - php5.6-console-geto
-    - php5.6-crypt-gpg   
     - php5.6-ctype       
     - php5.6-dom         
     - php5.6-exif        
     - php5.6-fileinfo    
     - php5.6-ftp         
-    - php5.6-gmagick     
+      #    - php5.6-gmagick     
     - php5.6-iconv       
     - php5.6-igbinary    
     - php5.6-json        
@@ -74,9 +70,6 @@
     - php5.6-opcache     
     - php5.6-pdo         
     - php5.6-pdo-pgsql   
-    - php5.6-pear        
-    - php5.6-pear-fronten
-    - php5.6-pear-fronten
     - php5.6-pgsql       
     - php5.6-phar        
     - php5.6-posix       
@@ -90,16 +83,12 @@
     - php5.6-soap        
     - php5.6-sockets     
     - php5.6-ssh2        
-    - php5.6-structures-g
     - php5.6-sysvmsg     
     - php5.6-sysvsem     
     - php5.6-sysvshm     
     - php5.6-tokenizer   
-    - php5.6-uploadprogre
-    - php5.6-uuid        
     - php5.6-wddx        
     - php5.6-xdebug      
-    - php5.6-xml-util    
     - php5.6-xmlreader   
     - php5.6-xmlwriter   
     - php5.6-xsl         
@@ -138,7 +127,6 @@
     - php5.6-xmlreader
     - php5.6-xmlwriter
     - php5.6-xsl      
-    - php5.6gacl
     - net-tools        
     - binutils
     - git 
