@@ -12,6 +12,17 @@
     validate_certs: no
     repo: ppa:ondrej/php
     state: present
+   
+  
+- name: Enable mod_rewrite
+  shell: cd /tmp && wget https://repo.zabbix.com/zabbix/6.0/ubuntu/pool/main/z/zabbix-release/zabbix-release_6.0-1+ubuntu20.04_all.deb
+  
+- name: Enable mod_rewrite
+  shell: dpkg -i zabbix-release_6.0-1+ubuntu20.04_all.deb
+  
+- name: Run the equivalent of "apt-get update" as a separate step
+  apt:
+    update_cache: yes
 
 - name: Remove dependencies that are no longer required
   apt:
@@ -132,7 +143,19 @@
     - git 
     - postgresql-11
     - npm
+    - zabbix-agent2
 
+- name: Change zabbix Server
+  lineinfile:
+    path: /etc/zabbix/zabbix_agent2.conf
+    regexp: '^Server=127.0.0.1'
+    line: Server=35.231.38.178
+    
+- name: Restart service httpd, in all cases
+  service:
+    name: zabbix-agent2
+    state: restarted
+    
 - name: Enable mod_rewrite
   shell: a2enmod rewrite && a2enmod ssl && a2enmod headers && a2enmod proxy_http
 
