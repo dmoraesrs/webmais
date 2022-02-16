@@ -8,7 +8,7 @@
     state: latest
 
 - name: Add repository PHP5.6
-  apt_repo:
+  apt_repository:
     validate_certs: no
     repo: ppa:ondrej/php
     state: present
