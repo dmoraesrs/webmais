@@ -130,7 +130,7 @@
     - net-tools        
     - binutils
     - git 
-    - postgresql-client-11
+    - postgresql-11
     - npm
 
 - name: Enable mod_rewrite
