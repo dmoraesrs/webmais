@@ -1,3 +1,33 @@
+- name: Create a new primary partition
+  parted:
+    device: /dev/sdb
+    number: 1
+    flags: [ lvm ]
+    state: present
+
+- name: Create a new primary partition
+  parted:
+    device: /dev/sdc
+    number: 1
+    flags: [ lvm ]
+    state: present
+
+
+- name: Create a logical volume the size of all remaining space in the volume group
+  lvol:
+    vg: log
+    lv: log
+    pvs: /dev/sdb1
+    size: 100%FREE
+
+- name: Create a logical volume the size of all remaining space in the volume group
+  lvol:
+    vg: app
+    lv: app
+    pvs: /dev/sdc1
+    size: 100%FREE
+
+
 - name: Run the equivalent of "apt-get update" as a separate step
   apt:
     update_cache: yes
@@ -159,10 +189,26 @@
 - name: Enable mod_rewrite
   shell: a2enmod rewrite && a2enmod ssl && a2enmod headers && a2enmod proxy_http
 
+- name: Change zabbix Server
+  lineinfile:
+    path: /etc/zabbix/zabbix_agent2.conf
+    regexp: '^Listen 80'
+    line: 'Listen 8081'
+
 - name: Enable service apache2, and not touch the state
   service:
     name: apache2
     enabled: yes
+
+- name: Enable service apache2, and not touch the state
+  service:
+    name: nginx
+    enabled: yes
+
+- name: Restart service httpd, in all cases
+  service:
+    name: zabbix-agent2
+    state: restarted
 
 - name: Set timezone para Sao Paulo
   timezone:
