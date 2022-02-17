@@ -1,3 +1,15 @@
+- name: Set timezone para Sao Paulo
+  timezone:
+    name: America/Sao_Paulo
+
+- name: Copy file with owner and permissions
+  copy:
+    src: /tmp/webmais/ansible/install-webserver/templates/script.sh
+    dest: /usr/local/bin/script.sh
+    owner: root
+    group: root
+    mode: '0755'
+
 - name: Create a new primary partition
   parted:
     device: /dev/sdb
@@ -37,7 +49,6 @@
     pvs: /dev/sdc1
     size: 100%FREE
 
-
 - name: Run the equivalent of "apt-get update" as a separate step
   apt:
     update_cache: yes
@@ -60,15 +71,6 @@
 - name: Enable mod_rewrite
   shell: dpkg -i /tmp/zabbix-release_6.0-1+ubuntu20.04_all.deb
   
-- name: Run the equivalent of "apt-get update" as a separate step
-  apt:
-    update_cache: yes
-
-- name: Remove dependencies that are no longer required
-  apt:
-    autoremove: yes
-
-
 - name: Repo PG
   shell: curl https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add - && sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
 
@@ -94,17 +96,17 @@
     fstype: xfs
     dev: /dev/log-log/log
 
-- name: Copy file with owner and permissions
-  copy:
-    src: /tmp/webmais/ansible/install-webserver/templates/script.sh
-    dest: /usr/local/bin/script.sh
-    owner: root
-    group: root
-    mode: '0755'
-
-
 - name: Change FSTAB
   shell: script.sh
+
+- name: Run the equivalent of "apt-get update" as a separate step
+  apt:
+    update_cache: yes
+
+- name: Remove dependencies that are no longer required
+  apt:
+    autoremove: yes
+
 
 - name: Install a list of packages
   apt:
@@ -250,6 +252,3 @@
     name: zabbix-agent2
     state: restarted
 
-- name: Set timezone para Sao Paulo
-  timezone:
-    name: America/Sao_Paulo
