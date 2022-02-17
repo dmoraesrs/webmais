@@ -39,14 +39,14 @@
   lvol:
     vg: log-log
     lv: log
-    pvs: /dev/sdb1
+    pvs: /dev/sdc1
     size: 100%FREE
 
 - name: Create a logical volume the size of all remaining space in the volume group
   lvol:
     vg: app-app
     lv: app
-    pvs: /dev/sdc1
+    pvs: /dev/sdb1
     size: 100%FREE
 
 - name: Run the equivalent of "apt-get update" as a separate step
