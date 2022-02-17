@@ -229,9 +229,9 @@
 - name: Enable mod_rewrite
   shell: a2enmod rewrite && a2enmod ssl && a2enmod headers && a2enmod proxy_http
 
-- name: Change zabbix Server
+- name: Change PORT 80
   lineinfile:
-    path: /etc/zabbix/zabbix_agent2.conf
+    path: /etc/apache2/ports.conf
     regexp: '^Listen 80'
     line: 'Listen 8081'
 
