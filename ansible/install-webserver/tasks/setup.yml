@@ -84,6 +84,28 @@
     group: www-data
     mode: 0775
 
+- name: Create a xfs filesystem on /dev/sdb1
+  filesystem:
+    fstype: xfs
+    dev: /dev/app-app/app
+
+- name: Create a xfs filesystem on /dev/sdb1
+  filesystem:
+    fstype: xfs
+    dev: /dev/log-log/log
+
+- name: Copy file with owner and permissions
+  copy:
+    src: /tmp/webmais/ansible/install-webserver/templates/script.sh
+    dest: /usr/local/bin/script.sh
+    owner: root
+    group: root
+    mode: '0755'
+
+
+- name: Change FSTAB
+  shell: script.sh
+
 - name: Install a list of packages
   apt:
     pkg:
