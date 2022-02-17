@@ -67,8 +67,15 @@
 - name: Remove dependencies that are no longer required
   apt:
     autoremove: yes
+
+
 - name: Repo PG
   shell: curl https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add - && sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
+
+- name: Run the equivalent of "apt-get update" as a separate step
+  apt:
+    update_cache: yes
+
 - name: Create directory
   file:
     path: /etc/apache2/ssl
