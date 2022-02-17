@@ -26,27 +26,26 @@
 
 - name: Create a volume group on top of /dev/sdb1 with physical extent size = 32MB
   lvg:
-    vg: log-log
+    vg: app-app
     pvs: /dev/sdb1
-
 
 - name: Create a volume group on top of /dev/sdb1 with physical extent size = 32MB
   lvg:
-    vg: app-app
-    pvs: /dev/sdc1
-
-- name: Create a logical volume the size of all remaining space in the volume group
-  lvol:
     vg: log-log
-    lv: log
     pvs: /dev/sdc1
-    size: 100%FREE
 
 - name: Create a logical volume the size of all remaining space in the volume group
   lvol:
     vg: app-app
     lv: app
     pvs: /dev/sdb1
+    size: 100%FREE
+
+- name: Create a logical volume the size of all remaining space in the volume group
+  lvol:
+    vg: log-log
+    lv: log
+    pvs: /dev/sdc1
     size: 100%FREE
 
 - name: Run the equivalent of "apt-get update" as a separate step
