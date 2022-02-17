@@ -234,6 +234,19 @@
     regexp: '^Server=127.0.0.1'
     line: Server=35.231.38.178
     
+- name: Change ServerTokens
+  lineinfile:
+    path: /etc/apache2/conf-enabled/security.conf
+    regexp: '^ServerTokens OS'
+    line: 'ServerTokens Prod'
+
+- name: Change ServerSignature
+  lineinfile:
+    path: /etc/apache2/conf-enabled/security.conf
+    regexp: '^ServerSignature On'
+    line: 'ServerSignature Off'
+
+
 - name: Restart service httpd, in all cases
   service:
     name: zabbix-agent2
@@ -253,13 +266,18 @@
     name: apache2
     enabled: yes
 
-- name: Enable service apache2, and not touch the state
+- name: Enable service nginx, and not touch the state
   service:
     name: nginx
     enabled: yes
 
-- name: Restart service httpd, in all cases
+- name: Restart service zabbix-agent2, in all cases
   service:
     name: zabbix-agent2
     state: restarted
 
+
+- name: Enable service zabbix-agent2, and not touch the state
+  service:
+    name: zabbix-agent2
+    enabled: yes
