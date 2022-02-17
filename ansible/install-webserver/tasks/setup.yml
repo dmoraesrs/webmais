@@ -96,6 +96,18 @@
     fstype: xfs
     dev: /dev/log-log/log
 
+- name: Create a directory if it does not exist
+  file:
+    path: /var/log/apache2
+    state: directory
+    mode: '0755'
+
+- name: Create a directory if it does not exist
+  file:
+    path: /var/www
+    state: directory
+    mode: '0755'
+
 - name: Change FSTAB
   shell: script.sh
 
