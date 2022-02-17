@@ -190,6 +190,7 @@
     - git 
     - postgresql-11
     - npm
+    - nginx
     - zabbix-agent2
 
 - name: Change zabbix Server
