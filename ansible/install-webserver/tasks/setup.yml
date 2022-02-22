@@ -226,11 +226,11 @@
     - postgresql-11
     - npm
     - nginx
-    - zabbix-agent2
+    - zabbix-agent
 
 - name: Change zabbix Server
   lineinfile:
-    path: /etc/zabbix/zabbix_agent2.conf
+    path: /etc/zabbix/zabbix_agentd.conf
     regexp: '^Server=127.0.0.1'
     line: Server=35.231.38.178
     
@@ -249,7 +249,7 @@
 
 - name: Restart service httpd, in all cases
   service:
-    name: zabbix-agent2
+    name: zabbix-agent
     state: restarted
     
 - name: Enable mod_rewrite
@@ -271,13 +271,13 @@
     name: nginx
     enabled: yes
 
-- name: Restart service zabbix-agent2, in all cases
+- name: Restart service zabbix-agent, in all cases
   service:
-    name: zabbix-agent2
+    name: zabbix-agent
     state: restarted
 
 
-- name: Enable service zabbix-agent2, and not touch the state
+- name: Enable service zabbix-agent, and not touch the state
   service:
-    name: zabbix-agent2
+    name: zabbix-agent
     enabled: yes
